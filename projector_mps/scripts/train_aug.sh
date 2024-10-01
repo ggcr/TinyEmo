@@ -38,7 +38,6 @@ python3 -m src.train_aug \
     --per_device_train_batch_size 32 \
     --per_device_eval_batch_size 16 \
     --num_train_epochs 5 \
-    --report_to "wandb" \
     --run_name joint_pretraining-${LLM_VARIANT}-${VT_VARIANT}-${DATASET} \
     --output_dir /home/cgutierrez/shared/checkpoints/projector-${LLM_VARIANT}-${VT_VARIANT}-${CONNECTOR}-${DATASET}_Augmented/ \
     --precomputed "True" \

@@ -38,7 +38,6 @@ python3 -m src.train \
     --per_device_eval_batch_size 32 \
     --num_train_epochs 5 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name joint_pretraining-${LLM_VARIANT}-${VT_VARIANT}-${DATASET} \
     --output_dir /home/cgutierrez/shared/checkpoints/projector-${LLM_VARIANT}-${VT_VARIANT}-${DATASET}_JointStrategy/ \
     --precomputed True \

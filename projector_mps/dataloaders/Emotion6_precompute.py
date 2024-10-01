@@ -10,8 +10,11 @@ import json
 class Emotion6Dataset_precompute():
     def __init__(self, vision_encoder, phase='train'):
         self.name = "Emotion6"
+
         if vision_encoder == 'openai/clip-vit-large-patch14':
-            dataset_root_path = '/home/cgutierrez/shared/features_clip-vit-large-patch14/Emotion6/'
+            dataset_root_path = '/Users/ggcr/Code/features_clip/Emotion6/Emotion6/'
+        elif vision_encoder == 'google/siglip-so400m-patch14-384':
+            dataset_root_path = '/Users/ggcr/Code/features_clip/Emotion6/Emotion6/'
         elif vision_encoder == 'openai/clip-vit-large-patch14-336':
             dataset_root_path = '/home/cgutierrez/shared/features_clip-vit-large-patch14-336/Emotion6/'
         elif vision_encoder == 'openai/clip-vit-base-patch16':
@@ -42,7 +45,7 @@ class Emotion6Dataset_precompute():
         return len(self.images)
 
     def __getitem__(self, index):
-        return torch.load(self.images[index]), torch.tensor(self.labels[index]), self.captions[index]
+        return torch.load(self.images[index], weights_only=False), torch.tensor(self.labels[index]), self.captions[index]
     
     def get_sentiments(self):
         res = {}

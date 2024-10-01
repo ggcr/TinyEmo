@@ -7,19 +7,19 @@ import torch
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.utils.data.dataset import random_split
 
-from src.model.model import Model
-from dataloaders.WEBEmo import WEBEmoDataset
-from dataloaders.Emotion6 import Emotion6Dataset
-from dataloaders.EmoROI import EmotionROIDataset
-from dataloaders.EmoSet import EmosetDataset
+from projector_mps.src.model.model import Model
+from projector_mps.dataloaders.WEBEmo import WEBEmoDataset
+from projector_mps.dataloaders.Emotion6 import Emotion6Dataset
+from projector_mps.dataloaders.EmoROI import EmotionROIDataset
+from projector_mps.dataloaders.EmoSet import EmosetDataset
 
-from dataloaders.WEBEmo_precompute import WEBEmoDataset_precompute
-from dataloaders.augmented_WEBEmo_precomputed import MergedEmotionDataset
-from dataloaders.Emotion6_precompute import Emotion6Dataset_precompute
-from dataloaders.EmoROI_precomputed import EmoROIDataset_precompute
-from dataloaders.EmoSet_precompute import EmosetDataset_precompute
+from projector_mps.dataloaders.WEBEmo_precompute import WEBEmoDataset_precompute
+from projector_mps.dataloaders.augmented_WEBEmo_precomputed import MergedEmotionDataset
+from projector_mps.dataloaders.Emotion6_precompute import Emotion6Dataset_precompute
+from projector_mps.dataloaders.EmoROI_precomputed import EmoROIDataset_precompute
+from projector_mps.dataloaders.EmoSet_precompute import EmosetDataset_precompute
 
-from src.model.utils import compute_top_accuracy
+from projector_mps.src.model.utils import compute_top_accuracy
 
 def train(model, train_dataloader, validation_dataloader, test_datalaoder, num_epochs, projector_weights_path):
     best_acc = 0
@@ -42,7 +42,7 @@ def test(model, dataloader, projector_weights_path=None):
     if projector_weights_path is not None:
         # Load projector weights
         print(f"Loading projector weights from {projector_weights_path}")
-        model.projector.load(projector_weights_path)
+        model.projector.load_state_dict(torch.load(projector_weights_path, map_location=model.device, weights_only=True))
     test_loss, embeds = model.eval(dataloader, return_image_embeds=True)
     print(f'Test Loss: {test_loss}')
     compute_top_accuracy(model, embeds)
@@ -58,7 +58,6 @@ if __name__ == '__main__':
     parser.add_argument('--per_device_train_batch_size', type=int, help='Train Batch size', default=32, required=True)
     parser.add_argument('--per_device_eval_batch_size', type=int, help='Train Eval size', default=32, required=True)
     parser.add_argument('--num_train_epochs', type=int, help='Train Eval size', default=5, required=True)
-    parser.add_argument('--report_to', type=str, help='Where to report', default='wandb', required=False)
     parser.add_argument('--run_name', type=str, help='Where to report', default='wandb', required=True)
     parser.add_argument('--output_dir', type=str, help='Where to save', required=True)
     parser.add_argument('--precomputed', type=str, help='Use precomputed dataloaders.', default=False)
@@ -119,7 +118,7 @@ if __name__ == '__main__':
         total_mem_gb = total_mem / (1024 ** 3)
         print(f"Free: {free_mem_gb:.2f} GB / Total: {total_mem_gb:.2f} GB")
     
-    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, len_dataloader=len(train_dataloader), report_to=args.report_to, dataset=dataset, run_name=args.run_name, output_dir=args.output_dir, precomputed=args.precomputed)
+    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, len_dataloader=len(train_dataloader), dataset=dataset, run_name=args.run_name, output_dir=args.output_dir, precomputed=args.precomputed)
 
     print(model.projector)
     train(model, train_dataloader, test_dataloader, test_dataloader, args.num_train_epochs, args.output_dir)

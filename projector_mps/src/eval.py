@@ -5,18 +5,18 @@ import numpy as np
 from torch.utils.data import DataLoader
 from torch.utils.data.dataset import random_split
 
-from src.model.model import Model
-from dataloaders.WEBEmo_precompute import WEBEmoDataset_precompute
-from dataloaders.Emotion6_precompute import Emotion6Dataset_precompute
-from dataloaders.EmoROI import EmotionROIDataset
-from dataloaders.EmoROI_precomputed import EmoROIDataset_precompute
-from dataloaders.EmoSet_precompute import EmosetDataset_precompute
-from dataloaders.FI_dataloader import FI_Dataset
-from dataloaders.Abstract_dataloader import AbstractDataset
-from dataloaders.ArtPhoto_dataloader import ArtPhotoDataset
-from dataloaders.UnbiasedEmo_dataloader import UnbiasedEmo_Dataset
-from dataloaders.FI_dataloader_precomputed import FIDataset_precompute
-from src.model.utils import compute_top_accuracy
+from projector_mps.src.model.model import Model
+from projector_mps.dataloaders.WEBEmo_precompute import WEBEmoDataset_precompute
+from projector_mps.dataloaders.Emotion6_precompute import Emotion6Dataset_precompute
+from projector_mps.dataloaders.EmoROI import EmotionROIDataset
+from projector_mps.dataloaders.EmoROI_precomputed import EmoROIDataset_precompute
+from projector_mps.dataloaders.EmoSet_precompute import EmosetDataset_precompute
+from projector_mps.dataloaders.FI_dataloader import FI_Dataset
+from projector_mps.dataloaders.Abstract_dataloader import AbstractDataset
+from projector_mps.dataloaders.ArtPhoto_dataloader import ArtPhotoDataset
+from projector_mps.dataloaders.UnbiasedEmo_dataloader import UnbiasedEmo_Dataset
+from projector_mps.dataloaders.FI_dataloader_precomputed import FIDataset_precompute
+from projector_mps.src.model.utils import compute_top_accuracy
 
 from pytorch_metric_learning import losses
 
@@ -25,7 +25,7 @@ def test(model, dataloader, projector_weights_path=None):
     if projector_weights_path is not None:
         # Load projector weights
         print(f"Loading projector weights from {projector_weights_path}")
-        model.projector.load_state_dict(torch.load(projector_weights_path))
+        model.projector.load_state_dict(torch.load(projector_weights_path, map_location=model.device, weights_only=True))
     test_loss, embeds = model.eval(dataloader, return_image_embeds=True)
     print(f'Test Loss: {test_loss}')
     compute_top_accuracy(model, embeds)
@@ -41,7 +41,6 @@ if __name__ == '__main__':
     parser.add_argument('--projector_weights_path', type=str, help='Path to the projector weights.', required=True)
     parser.add_argument('--per_device_eval_batch_size', type=int, help='Eval batch size', default=16, required=True)
     parser.add_argument('--num_train_epochs', type=int, help='Train Eval size', default=5, required=False)
-    parser.add_argument('--report_to', type=str, help='Where to report', default='wandb', required=False)
     parser.add_argument('--loss_name', type=str, help='Loss to use during training', default='infoNCE', required=True)
     parser.add_argument('--run_name', type=str, help='Where to report', default='', required=True)
     parser.add_argument('--precomputed', type=str, help='Use precomputed dataloaders.', default=False)
@@ -79,7 +78,7 @@ if __name__ == '__main__':
     
     test_dataloader = DataLoader(test_dataset, batch_size=args.per_device_eval_batch_size, shuffle=True, drop_last=True, num_workers=4)
 
-    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, report_to=args.report_to, dataset=dataset, run_name=args.run_name, precomputed=args.precomputed)
+    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, dataset=dataset, run_name=args.run_name, precomputed=args.precomputed)
     model.loss_name = args.loss_name
     if args.loss_name == 'CosineEmbedding':
         print(f"Using loss {args.loss_name}")

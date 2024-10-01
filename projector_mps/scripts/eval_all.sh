@@ -38,7 +38,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 8 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
     --precomputed "True" \
 
@@ -52,7 +51,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 16 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
     --precomputed "True" \
 
@@ -66,7 +64,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 16 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
     --precomputed "True" \
 
@@ -81,7 +78,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 8 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
     --precomputed "True" \
 
@@ -95,7 +91,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 16 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
     --precomputed "True" \
 
@@ -109,7 +104,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 4 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
 
 DATASET="Abstract"
@@ -122,7 +116,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 4 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
 
 DATASET="UnbiasedEmo"
@@ -135,7 +128,6 @@ python3 -m src.eval \
     --projector_weights_path "$PROJECTOR_PATH" \
     --per_device_eval_batch_size 16 \
     --loss_name "$LOSS_NAME" \
-    --report_to "wandb" \
     --run_name test-${DATASET}-projector-${LLM_VARIANT}-${VT_VARIANT} \
 
 

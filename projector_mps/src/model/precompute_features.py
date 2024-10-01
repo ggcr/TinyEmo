@@ -7,14 +7,14 @@ import torch
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.utils.data.dataset import random_split
 
-from src.model.model import Model
-from dataloaders.WEBEmo import WEBEmoDataset
-from dataloaders.Emotion6 import Emotion6Dataset
-from dataloaders.EmoROI import EmotionROIDataset
-from dataloaders.EmoSet import EmosetDataset
-from dataloaders.FI_dataloader import FI_Dataset
-from dataloaders.UnbiasedEmo_dataloader import UnbiasedEmo_Dataset
-from src.model.utils import compute_top_accuracy
+from projector_mps.src.model.model import Model
+from projector_mps.dataloaders.WEBEmo import WEBEmoDataset
+from projector_mps.dataloaders.Emotion6 import Emotion6Dataset
+from projector_mps.dataloaders.EmoROI import EmotionROIDataset
+from projector_mps.dataloaders.EmoSet import EmosetDataset
+from projector_mps.dataloaders.FI_dataloader import FI_Dataset
+from projector_mps.dataloaders.UnbiasedEmo_dataloader import UnbiasedEmo_Dataset
+from projector_mps.src.model.utils import compute_top_accuracy
 
 
 if torch.cuda.is_available():
@@ -49,7 +49,6 @@ if __name__ == '__main__':
     parser.add_argument('--per_device_train_batch_size', type=int, help='Train Batch size', default=32, required=True)
     parser.add_argument('--per_device_eval_batch_size', type=int, help='Train Eval size', default=32, required=True)
     parser.add_argument('--num_train_epochs', type=int, help='Train Eval size', default=5, required=True)
-    parser.add_argument('--report_to', type=str, help='Where to report', default='wandb', required=False)
     parser.add_argument('--run_name', type=str, help='Where to report', default='wandb', required=True)
     parser.add_argument('--output_dir', type=str, help='Where to save', required=True)
     args = parser.parse_args()
@@ -115,7 +114,7 @@ if __name__ == '__main__':
     val_dataloader = DataLoader(validation_dataset, batch_size=args.per_device_eval_batch_size, shuffle=True, drop_last=False, num_workers=4)
     test_dataloader = DataLoader(test_dataset, batch_size=args.per_device_eval_batch_size, shuffle=True, drop_last=False, num_workers=4)
 
-    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, len_dataloader=len(test_dataloader), report_to=args.report_to, dataset=dataset, run_name=args.run_name, output_dir=args.output_dir)
+    model = Model(vision_encoder_path=args.vision_encoder_path, model_path=args.model_path, tokenizer_path=args.tokenizer_path, num_epochs=args.num_train_epochs, len_dataloader=len(test_dataloader), dataset=dataset, run_name=args.run_name, output_dir=args.output_dir)
 
     print(model.projector)
     precompute_features(model, train_dataloader, train_path)

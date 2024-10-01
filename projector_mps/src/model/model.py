@@ -1,13 +1,12 @@
 import torch
 import tqdm
 import numpy as np
-import wandb
 import os
 
-from src.model.vision_encoder import VisionEncoder
-from src.model.llm import LLM
-from src.model.projector import AlignmentMLP
-from src.model.utils import pos_neg_infoNCE, check_gradients
+from projector_mps.src.model.vision_encoder import VisionEncoder
+from projector_mps.src.model.llm import LLM
+from projector_mps.src.model.projector import AlignmentMLP
+from projector_mps.src.model.utils import pos_neg_infoNCE, check_gradients, get_combined_record
 
 class Model:
     def __init__(
@@ -15,7 +14,6 @@ class Model:
         vision_encoder_path: str,
         model_path: str,
         tokenizer_path: str,
-        report_to: str = None,
         dataset: str = None,
         run_name: str = None,
         output_dir: str = '/tmp/',
@@ -61,7 +59,6 @@ class Model:
         self.scheduler = torch.optim.lr_scheduler.OneCycleLR(self.optimizer, max_lr=0.0005, total_steps=len_dataloader*num_epochs, pct_start=0.005)
         
         self.num_epochs = num_epochs
-        self.report_to = report_to
         self.output_dir = output_dir
         self.dataset = dataset
         self.precomputed = precomputed
@@ -128,7 +125,7 @@ class Model:
         return mean_loss
     
 
-    def eval(self, dataloader, epoch=None):
+    def eval(self, dataloader, epoch=None, return_image_embeds=False):
         self.projector.eval()
         running_loss = []
         embeds = []
@@ -136,8 +133,14 @@ class Model:
             for batch_idx, (images, labels, sentiments) in enumerate(tqdm.tqdm(dataloader)):
                 labels = labels.to(self.device)
                 sentiments = list(sentiments)
-                loss = self.step(images, labels, sentiments)
+                if return_image_embeds == True:
+                    loss, img_embeds = self.step(images, labels, sentiments, return_image_embeds=True)
+                    embeds.append({'img_embeds': img_embeds.cpu().detach(), 'labels': labels.cpu(), 'sentiments': sentiments})
+                else:
+                    loss = self.step(images, labels, sentiments)
                 if loss.item() != -1: 
                     running_loss.append(loss.item())
         mean_loss = torch.Tensor(running_loss).mean()
+        if return_image_embeds == True:
+            return mean_loss, get_combined_record(embeds)
         return mean_loss

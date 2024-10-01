@@ -29,6 +29,5 @@ python3 -m src.model.precompute_features \
     --per_device_train_batch_size 16 \
     --per_device_eval_batch_size 16 \
     --num_train_epochs 2 \
-    --report_to "wandb" \
     --run_name "precompute-features-${VT_VARIANT}-${DATASET}" \
     --output_dir "/home/cgutierrez/checkpoints/projector-${VT_VARIANT}-FI/"

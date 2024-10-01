@@ -44,6 +44,19 @@ def check_gradients(projector):
     return gradients
 
 
+def get_combined_record(embeds):
+    all_img_embeds = []
+    all_labels = []
+    all_sentiments = []
+    for record in embeds: 
+        all_img_embeds.append(record['img_embeds'])
+        all_labels.append(record['labels'])
+        all_sentiments += record['sentiments']
+    all_img_embeds = torch.cat(all_img_embeds, dim=0)
+    all_labels = torch.cat(all_labels, dim=0)
+    return {'img_embeds': all_img_embeds, 'labels': all_labels, 'sentiments': all_sentiments}
+
+
 def compute_top_accuracy(model, test_img_embds):
     if torch.cuda.is_available():
         device = torch.device('cuda')

@@ -98,7 +98,7 @@ class MergedEmotionDataset:
         img_path = self.images[index]
         label = self.labels[index]
         emotion = self.emotions[index]
-        return torch.load(img_path), torch.tensor(label), emotion
+        return torch.load(img_path, weights_only=False), torch.tensor(label), emotion
 
     def get_num_classes(self) -> int:
         return len(self.emotion_to_label)

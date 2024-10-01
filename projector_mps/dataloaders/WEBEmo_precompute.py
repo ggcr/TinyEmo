@@ -76,4 +76,4 @@ class WEBEmoDataset_precompute():
         img_path = self.images[index]
         label = self.labels[index]
         sentiment = self.sentiments[index]
-        return torch.load(self.images[index]), torch.tensor(label), sentiment
+        return torch.load(self.images[index], weights_only=False), torch.tensor(label), sentiment

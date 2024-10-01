@@ -41,5 +41,5 @@ class EmosetDataset_precompute():
         return len(self.images)
 
     def __getitem__(self, index):
-        return torch.load(self.images[index]), torch.tensor(self.labels[index]), self.captions[index]
+        return torch.load(self.images[index], weights_only=False), torch.tensor(self.labels[index]), self.captions[index]
 
