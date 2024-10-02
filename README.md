@@ -91,7 +91,7 @@ Our codebase for the MM-LLM is forked from the [TinyLLaVA](https://github.com/Ti
   year         = 2024,
   month        = {September},
   address      = {Barcelona, Spain},
-  school       = {Universitat Autònoma de Barcelona (UAB)},
+  school       = {Universitat Autonoma de Barcelona (UAB)},
   type         = {Master's thesis}
 }
 ```
