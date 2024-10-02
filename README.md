@@ -46,12 +46,9 @@ Refer to the [TinyLLaVA](https://github.com/TinyLLaVA/TinyLLaVA_Factory) install
 
 We provide precomputed CLIP features for the Emotion6 dataset, and you can evaluate them using two methods:
 
-1. **Using our Projectors from Hugging Face**
-2. **Using Custom Projectors with Local Weights**
+#### Our Projectors from Hugging Face
 
-#### 1. Our Projectors from Hugging Face
-
-To evaluate the projectors from Hugging Face, use the script:
+To evaluate the projectors from Hugging Face, use the [scripts/eval.sh](https://github.com/ggcr/TinyEmo/blob/main/projector_mps/scripts/eval.sh) script:
 
 ```bash
 conda activate projector_mps
@@ -60,14 +57,14 @@ bash projector_mps/scripts/eval.sh
 
 Below is a table of the available projectors:
 
-| Hugging Face Model                               | Components                             | Zero-shot Accuracy | Link                                                                 |
-|--------------------------------------------------|----------------------------------------|--------------------|----------------------------------------------------------------------|
-| `ggcristian/TinyEmo-CLIP-OpenELM-270M`           | CLIP ViT-L/14 + OpenELM-270M-Instruct  | 57.87%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-270M) |
-| `ggcristian/TinyEmo-CLIP-OpenELM-450M`           | CLIP ViT-L/14 + OpenELM-450M-Instruct  | 55.24%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
-| `ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn`      | CLIP ViT-L/14 + TinyLLaMA 1.1          | 56.13%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn) |
-| `ggcristian/TinyEmo-CLIP-Phi-2`                  | CLIP ViT-L/14 + Microsoft Phi 2        | 56.28%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-Phi-2)      |
+| Model Architecture                     | Parameters | Zero-shot Accuracy | HuggingFace Link                                                                 |
+|----------------------------------------| ---------- |--------------------|----------------------------------------------------------------------|
+| CLIP ViT-L/14 + OpenELM-270M-Instruct  | 0.70B      | 57.87%             | [ggcristian/TinyEmo-CLIP-OpenELM-270M-Syn](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-270M) |
+| CLIP ViT-L/14 + OpenELM-450M-Instruct  | 0.88B      | 55.24%             | [ggcristian/TinyEmo-CLIP-OpenELM-450M](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
+| CLIP ViT-L/14 + TinyLLaMA 1.1          | 1.53B      | 56.13%             | [ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn](https://huggingface.co/ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn) |
+| CLIP ViT-L/14 + Microsoft Phi 2        | 3.21B      | 56.28%             | [ggcristian/TinyEmo-CLIP-Phi-2](https://huggingface.co/ggcristian/TinyEmo-CLIP-Phi-2)      |
 
-#### 2. Custom Projectors with Local Weights
+#### Custom Projectors with Local Weights
 
 To use custom local weights or models, run the following:
 
