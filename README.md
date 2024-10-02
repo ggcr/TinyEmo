@@ -1,6 +1,10 @@
 # TinyEmo
 
-[Paper]() [Metric Projector Card]() [TinyEmo MM-LLM Card]() [Reasoning Pre-training Dataset](https://huggingface.co/datasets/ggcristian/TinyEmo-Pretrain-525k) [Reasoning Fine-tuning Dataset](https://huggingface.co/datasets/ggcristian/TinyEmo-EmoReason-175k) [Reasoning Claude Dataset](https://huggingface.co/datasets/ggcristian/TinyEmo-EmoReasonHQ-Claude-1.4k)
+[Paper]
+
+[Metric Projector Card] [TinyEmo MM-LLM Card]
+
+[[Reasoning Pre-training Dataset]](https://huggingface.co/datasets/ggcristian/TinyEmo-Pretrain-525k) [[Reasoning Fine-tuning Dataset]](https://huggingface.co/datasets/ggcristian/TinyEmo-EmoReason-175k) [[Reasoning Claude Dataset]](https://huggingface.co/datasets/ggcristian/TinyEmo-EmoReasonHQ-Claude-1.4k)
 
 TinyEmo is a family of small multi-modal language models for emotional reasoning and classification. Our
 approach features: (1) a synthetic emotional instruct dataset for both pre-training and fine-tuning stages, (2) a Metric Projector
