@@ -38,16 +38,46 @@ pip install -e projector_mps/.
 
 Refer to the [TinyLLaVA](https://github.com/TinyLLaVA/TinyLLaVA_Factory) installation section.
 
+
+
 ## Quickstart
 
-### Metric Projector inference on Emotion6 dataset
+### Metric Projector inference
 
-In the scripts section we provide the data and the script to perform inference on Emotion6 (see [eval_Emotion6.sh](https://github.com/ggcr/TinyEmo/blob/main/projector_mps/scripts/eval_Emotion6.sh)).
+We provide precomputed CLIP features for the Emotion6 dataset, and you can evaluate them using two methods:
 
-```
+1. **Using our Projectors from Hugging Face**
+2. **Using Custom Projectors with Local Weights**
+
+#### 1. Our Projectors from Hugging Face
+
+To evaluate the projectors from Hugging Face, use the script:
+
+```bash
 conda activate projector_mps
-bash projector_mps/scripts/eval_Emotion6.sh
+bash projector_mps/scripts/eval.sh
 ```
+
+Below is a table of the available projectors:
+
+| Hugging Face Model                               | Components                             | Zero-shot Accuracy | Link                                                                 |
+|--------------------------------------------------|----------------------------------------|--------------------|----------------------------------------------------------------------|
+| `ggcristian/TinyEmo-CLIP-OpenELM-270M`           | CLIP ViT-L/14 + OpenELM-270M-Instruct  | 57.87%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-270M) |
+| `ggcristian/TinyEmo-CLIP-OpenELM-450M`           | CLIP ViT-L/14 + OpenELM-450M-Instruct  | 55.24%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
+| `ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn`      | CLIP ViT-L/14 + TinyLLaMA 1.1          | 56.13%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn) |
+| `ggcristian/TinyEmo-CLIP-Phi-2`                  | CLIP ViT-L/14 + Microsoft Phi 2        | 56.28%              | [Hugging Face](https://huggingface.co/ggcristian/TinyEmo-CLIP-Phi-2)      |
+
+#### 2. Custom Projectors with Local Weights
+
+To use custom local weights or models, run the following:
+
+```bash
+conda activate projector_mps
+bash projector_mps/scripts/eval_custom.sh
+```
+
+This allows you to specify different vision encoders, language models, and loss functions, as well as use your own projector weights.
+
 
 ## Acknowledgement
 

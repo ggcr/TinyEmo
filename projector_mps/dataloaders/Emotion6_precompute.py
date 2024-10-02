@@ -12,9 +12,7 @@ class Emotion6Dataset_precompute():
         self.name = "Emotion6"
 
         if vision_encoder == 'openai/clip-vit-large-patch14':
-            dataset_root_path = '/Users/ggcr/Code/features_clip/Emotion6/Emotion6/'
-        elif vision_encoder == 'google/siglip-so400m-patch14-384':
-            dataset_root_path = '/Users/ggcr/Code/features_clip/Emotion6/Emotion6/'
+            dataset_root_path = 'projector_mps/sample_data/Emotion6/Emotion6/'
         elif vision_encoder == 'openai/clip-vit-large-patch14-336':
             dataset_root_path = '/home/cgutierrez/shared/features_clip-vit-large-patch14-336/Emotion6/'
         elif vision_encoder == 'openai/clip-vit-base-patch16':
