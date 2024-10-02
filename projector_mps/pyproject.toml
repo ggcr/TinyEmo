@@ -1,0 +1,44 @@
+[project]
+name = "TinyEmo"
+version = "1.0.0"
+description = "'TinyEmo: Scaling down Emotional Reasoning via Metric Projection' ACMCV 2024"
+requires-python = "==3.10"
+
+dependencies = [
+    "numpy==1.21.2",
+    "torch==2.0.1",
+    "tqdm==4.64.0",
+    "transformers==4.39.3",
+    "pytorch-metric-learning==0.9.99",
+    "git+https://github.com/openai/CLIP.git",
+]
+
+
+
+
+
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "TinyEmo"
+version = "1.0.0"
+description = "'TinyEmo: Scaling down Emotional Reasoning via Metric Projection' ACMCV 2024"
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+]
+dependencies = [
+"torch==2.6.0", "torchvision==0.20.0", "transformers==4.45.1",         
+"tokenizers==0.20.0", "numpy==1.26.4", "pillow==9.3.0", "packaging==24.1",
+"regex==2024.9.11", "pytorch-metric-learning==2.6.0", "ftfy==6.2.3",
+"requests==2.32.3", "tqdm==4.66.5", "git+https://github.com/openai/CLIP.git", 
+]
+
+[project.urls]
+"Homepage" = "https://github.com/ggcr/TinyEmo"
+"Bug Tracker" = "https://github.com/ggcr/TinyEmo/issues"
