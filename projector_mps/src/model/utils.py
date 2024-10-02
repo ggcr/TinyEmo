@@ -72,41 +72,23 @@ def compute_top_accuracy(model, test_img_embds):
     sentiments_embeds = torch.nn.functional.normalize(sentiments_embeds, p=2, dim=1)
 
     correct_top1 = 0
-    correct_top3 = 0
-    correct_top5 = 0
     total = 0
     total_distances = []
 
     for i, q_emb in enumerate(img_embeds):
         gt_label = test_img_embds['sentiments'][i]
         distances = np.linalg.norm((sentiments_embeds - q_emb).cpu().detach().numpy(), axis=1)
-
         total_distances.append(np.min(distances))
-        
         sorted_indices = np.argsort(distances).tolist()
-        
         closest_labels_top1 = unique_sentiments[sorted_indices[:1]].tolist()[0]
-        closest_labels_top3 = unique_sentiments[sorted_indices[:3]].tolist()[0]
-        closest_labels_top5 = unique_sentiments[sorted_indices[:5]].tolist()[0]
-        
         if gt_label in closest_labels_top1:
             correct_top1 += 1
-        if gt_label in closest_labels_top3:
-            correct_top3 += 1
-        if gt_label in closest_labels_top5:
-            correct_top5 += 1
-        
         total += 1
 
     accuracy_top1 = correct_top1 / total
-    accuracy_top3 = correct_top3 / total
-    accuracy_top5 = correct_top5 / total
-
     mean_min_distance = np.mean(total_distances)
 
     print(f"Top-1 Accuracy: {accuracy_top1:.4f}")
-    print(f"Top-3 Accuracy: {accuracy_top3:.4f}")
-    print(f"Top-5 Accuracy: {accuracy_top5:.4f}")
     print(f"Mean Minimum Distance: {mean_min_distance:.4f}")
 
     return accuracy_top1
