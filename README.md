@@ -42,7 +42,7 @@ Refer to the [TinyLLaVA](https://github.com/TinyLLaVA/TinyLLaVA_Factory) install
 
 ### Metric Projector inference on Emotion6 dataset
 
-In the scripts section we provide the data and the script to evaluate on Emotion6 (see [eval_Emotion6.sh](https://github.com/ggcr/TinyEmo/projector_mps/scripts/eval_Emotion6.sh)).
+In the scripts section we provide the data and the script to perform inference on Emotion6 (see [eval_Emotion6.sh](https://github.com/ggcr/TinyEmo/blob/main/projector_mps/scripts/eval_Emotion6.sh)).
 
 ```
 conda activate projector_mps
@@ -52,6 +52,7 @@ bash projector_mps/scripts/eval_Emotion6.sh
 ## Acknowledgement
 
 The Metric Projector was built from the foundations of [CLIP-E](https://arxiv.org/abs/2310.12062) paper!
+
 Our codebase for the MM-LLM is forked from the [TinyLLaVA](https://github.com/TinyLLaVA/TinyLLaVA_Factory) project.
 
 ## Citation
