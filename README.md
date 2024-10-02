@@ -57,10 +57,10 @@ bash projector_mps/scripts/eval.sh
 
 Below is a table of the available projectors:
 
-| Model Architecture                     | Parameters | Zero-shot Accuracy (*paper) | HuggingFace Link                                                                 |
+| Model Architecture                     | Parameters | Zero-shot Accuracy | HuggingFace Link                                                                 |
 |----------------------------------------| ---------- |--------------------|----------------------------------------------------------------------|
-| CLIP ViT-L/14 + OpenELM-270M-Instruct  | 0.70B      | 57.87%             | [HF Projector 0.70B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-270M) |
-| CLIP ViT-L/14 + OpenELM-450M-Instruct  | 0.88B      | 55.24%             | [HF Projector 0.88B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
+| CLIP ViT-L/14 + OpenELM-270M-I         | 0.70B      | 57.87%             | [HF Projector 0.70B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-270M) |
+| CLIP ViT-L/14 + OpenELM-450M-I         | 0.88B      | 55.24%             | [HF Projector 0.88B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
 | CLIP ViT-L/14 + TinyLLaMA 1.1          | 1.53B      | 56.13%             | [HF Projector 1.53B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn) |
 | CLIP ViT-L/14 + Microsoft Phi 2        | 3.21B      | 56.28%             | [HF Projector 3.21B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-Phi-2)      |
 
