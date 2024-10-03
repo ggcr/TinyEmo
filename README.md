@@ -55,7 +55,7 @@ conda activate projector_mps
 bash projector_mps/scripts/eval.sh
 ```
 
-Below is a table of the available projectors:
+The **Zero-shot Accuracy** in the table below is the average accuracy across multiple datasets, including *Emotion6*, *FI*, *ArtPhoto*, *Abstract*, and *UnbiasedEmo*.
 
 | Model Architecture                     | Parameters | Zero-shot Accuracy | HuggingFace Link                                                                 |
 |----------------------------------------| ---------- |--------------------|----------------------------------------------------------------------|
@@ -63,6 +63,10 @@ Below is a table of the available projectors:
 | CLIP ViT-L/14 + OpenELM-450M-I         | 0.88B      | 55.24%             | [HF Projector 0.88B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-OpenELM-450M) |
 | CLIP ViT-L/14 + TinyLLaMA 1.1          | 1.53B      | 56.13%             | [HF Projector 1.53B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-TinyLlama-1_1-Syn) |
 | CLIP ViT-L/14 + Microsoft Phi 2        | 3.21B      | 56.28%             | [HF Projector 3.21B Link](https://huggingface.co/ggcristian/TinyEmo-CLIP-Phi-2)      |
+
+A more extensive eval of the results can be seen on Table VIII from the paper:
+
+<img src="projector_mps/misc/images/table_viii.png" />
 
 #### Custom Projectors with Local Weights
 
