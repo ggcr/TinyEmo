@@ -1,6 +1,6 @@
 # TinyEmo
 
-[[Paper]](https://ddd.uab.cat/record/301610?ln=en)
+[[Paper]](https://arxiv.org/abs/2410.07062)
 
 [[Metric Projector Card]](https://huggingface.co/collections/ggcristian/tinyemo-projectors-66fd14187fbd5d30764abc24) [TinyEmo MM-LLM Card]
 
@@ -95,7 +95,7 @@ Our codebase for the MM-LLM is forked from the [TinyLLaVA](https://github.com/Ti
   year         = 2024,
   month        = {September},
   address      = {Barcelona, Spain},
-  note         = {Available at \url{https://ddd.uab.cat/record/301610?ln=en}},
+  note         = {Available at \url{https://arxiv.org/abs/2410.07062}},
   school       = {Universitat Autonoma de Barcelona (UAB)},
   type         = {Master's thesis in Computer Vision}
 }
